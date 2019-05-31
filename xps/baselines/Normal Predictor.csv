@@ -1,0 +1,13 @@
+category,predictor,nfactors,rmse,mae
+Video Games,Normal Predictor,,1.5630152634465895,1.1973105276635212
+Toys and Games,Normal Predictor,,1.262698531864113,0.9341908487260474
+Sports and Outdoors,Normal Predictor,,1.257402705931803,0.9184510249177197
+Movies and TV,Normal Predictor,,1.5463269143356195,1.1808444664785984
+Kindle Store,Normal Predictor,,1.2292246021618178,0.9152164151281936
+Home and Kitchen,Normal Predictor,,1.4168053336772604,1.040902920204206
+Health and Personal Care,Normal Predictor,,1.4364675929447548,1.069631774505002
+Electronics,Normal Predictor,,1.515736194288244,1.1310647598907921
+Clothing Shoes and Jewelry,Normal Predictor,,1.4137673840105707,1.0623327404391174
+Cell Phones and Accessories,Normal Predictor,,1.5705279338587053,1.1929894517938484
+CDs and Vinyl,Normal Predictor,,1.3745747498835228,1.0197479909299354
+Books,Normal Predictor,,1.3619359309928147,1.0247878993028232
