@@ -1,0 +1,2 @@
+category,predictor,nfactors,rmse,mae
+Video Games,CDL-SDAE,10,1.2406298825574502,0.9423998810662689
