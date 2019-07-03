@@ -1,4 +1,4 @@
-# master
+# Recommender System for Amazon Dataset
 
 ## Data set
 http://jmcauley.ucsd.edu/data/amazon/
@@ -9,5 +9,4 @@ http://jmcauley.ucsd.edu/data/amazon/
 * data_preprocessing.ipynb - preprocess review texts woth spaCy lib
 * baselines_* - train baselines and gather data
 
-## Evaluation
 
