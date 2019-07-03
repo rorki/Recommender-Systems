@@ -1,7 +1,6 @@
 # custom
 models/
 models/*
-optimiz/
 __pycache__/
 .ipynb_checkpoints/
 images/
@@ -9,3 +8,4 @@ src/
 shit*
 Untitled*
 studying*
+examples/
