@@ -6,6 +6,7 @@ class MF():
     def __init__(self , rating_matrix, k, lambda_u, lambda_v):        
         self.k = k         
         self.Q = rating_matrix
+        self.Q = self.Q - np.mean(self.Q)
         self.non_zero_idx = self.Q > 0
         
         self.W = rating_matrix > 0.5
@@ -26,7 +27,7 @@ class MF():
         
         #self.U = np.mat(np.random.normal(0 , 1/self.u_lambda , size=(self.k, self.num_u)))
         #self.V = np.mat(np.random.normal(0 , 1/self.v_lambda , size=(self.k, self.num_v)))
-                        
+            
     
     def ALS_v3_weighted(self, V_sdae):
         Y_ = np.insert(self.Y, 0, 1, axis = 0)
@@ -36,8 +37,7 @@ class MF():
             c = Y_ * Wu
             
             a = np.matmul(c, np.transpose(self.Q[u] - self.beta_y))
-            d = np.matmul(c, np.transpose(Y_)) 
-            d += self.lambda_x
+            d = np.matmul(c, np.transpose(Y_)) + self.lambda_x
             self.beta_x[u], *self.X[u] = np.linalg.solve(d, a).T
         
         X_ = np.insert(self.X, 0, 1, axis = 1)
@@ -46,9 +46,9 @@ class MF():
             c = X_.T * Wi
             
             a = np.matmul(c, self.Q[:, i] - self.beta_x) 
-            b = np.matmul(self.lambda_y, np.insert(V_sdae[i], 0, 0, axis = 0))
+            #b = np.matmul(self.lambda_y, np.insert(V_sdae[i], 0, 0, axis = 0))
             
-            self.beta_y[i], *self.Y[:,i] = np.linalg.solve(np.matmul(c, X_) + self.lambda_y, a + b)
+            self.beta_y[i], *self.Y[:,i] = np.linalg.solve(np.matmul(c, X_) + self.lambda_y, a) #+ b)
             
         preds = np.dot(self.X, self.Y) 
         preds += self.beta_x.reshape(-1, 1)
