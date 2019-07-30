@@ -5,6 +5,23 @@ Util methods for evaluation of predictions.
 """
 
 
+def precision_recall_at_k_4arrays(uids, estimations, real_values, k=10, threshold=3.5):
+    """
+    Calculate recall@M and precision@M for predictions in arrays.
+    :param uids: user ids
+    :param estimations: estimations
+    :param real_values: real values
+    :param k:
+    :param threshold:
+    :return:
+    """
+    user_est_true = defaultdict(list)
+    for uid,  est, true_r in zip(uids, estimations, real_values):
+        user_est_true[uid].append((est, true_r))
+
+    return precision_recall_at_k(user_est_true, k, threshold)
+
+
 def precision_recall_at_k_4df(df, k=10, threshold=3.5):
     """
     Calculate recall@M and precision@M for predictions in pandas DataFrame.

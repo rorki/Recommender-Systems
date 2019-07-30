@@ -8,35 +8,42 @@ XPDescription = namedtuple('XPDescription', ['predictor', 'label', 'nfactors'])
 # named tuple describing experiment evaluation results
 XPResults = namedtuple('XPResults', ['dataset', 'xpdata', 'rmse', 'mae', 'precision', 'recall'])
 
-ROOT = './xps/'
+ROOT = 'D:/Evaluations/master/'
 
 
-def make_dirs(xp_name):
+def make_dirs(xp_name, dataset_name):
     """
     Makes output directories for experiment evaluation.
 
     :param xp_name: str, name of experiment
+    :param dataset_name: str, name of dataset
     :return: str, path to experiment directory
     """
     # make dirs if not exist
-    if not os.path.isdir(ROOT):
-        os.mkdir(ROOT)
+    path = ROOT
+    if not os.path.isdir(path):
+        os.mkdir(path)
 
-    if not os.path.isdir(ROOT + xp_name):
-        os.mkdir(ROOT + xp_name)
+    path += dataset_name
+    if not os.path.isdir(path):
+        os.mkdir(path)
 
-    xp_dir = ROOT + xp_name + '/'
-    return xp_dir
+    path += '/' + xp_name
+    if not os.path.isdir(path):
+        os.mkdir(path)
+
+    return path + '/'
 
 
-def write_to_csv(xp_results, xp_name):
+def write_to_csv(xp_results, dataset_name, xp_name):
     """
     Writes RMSE, MAE and recall\precision results into corresponding files.
     :param xp_results: named tuple with evaluation details.
+    :param dataset_name: str, name of dataset
     :param xp_name: name of experiment
     :return: none
     """
-    xp_dir = make_dirs(xp_name)
+    xp_dir = make_dirs(xp_name, dataset_name)
     predictor_file = Path('%s%s.csv' % (xp_dir, xp_results.xpdata.label))
 
     # write headers if file not yet created

@@ -6,7 +6,7 @@ import numpy as np
 
 
 class CDL:
-    def __init__(self, dataset, out_path=None, k=10, epochs=50, batch_size=32, lr=0.001, hidden_size=25,
+    def __init__(self, dataset, out_path=None, k=10, epochs=50, batch_size=32, lr=0.0001, hidden_size=25,
                  matrix_noise=0.3, drop_ratio=0.1, lambda_w=1, lambda_n=1, lambda_v=1, lambda_q=0.01):
         self.out_path = out_path
         self.k = k
