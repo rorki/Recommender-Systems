@@ -9,12 +9,12 @@ https://sites.google.com/eng.ucsd.edu/ucsdbookgraph
 
 ## Project structure
 
-* graphs_* - variuos visualizations
+* models/* - cdl and optimization algoruthms
+* cdl_* - run models for godreads and amazon datasets
 * data_preprocessing.ipynb - preprocess review texts with spaCy lib
-* baselines_* - train baselines and gather data
-* matrix_factorization_with_als.py - basic matrix factorizations using ALS
-* utils_*.py - utilities with output and evaluation methods
-* other *.py - out utils
+* baselines_* - train baselines, using surprise lib
+* helpful_stuff/* - utilities with output and evaluation methods
+* graphs_* - variuos visualizations
 
 ### CDL-based models
 * cdl_conv_mf - CDL models with convolutional net for building reviews representations
