@@ -1,7 +1,8 @@
 import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-class MF():
+
+class MF:
     
     def __init__(self , rating_matrix, k, lambda_u, lambda_v):        
         self.k = k         

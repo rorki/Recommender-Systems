@@ -1,14 +1,19 @@
-# Recommender System for Amazon Dataset
+# Recommender system enhanced with deep representations of customer reviews
 
-## Data set
+## Data sets
+* Amazon Reviews Dataset: 
 http://jmcauley.ucsd.edu/data/amazon/
+
+* Goodreads Datasets:
+https://sites.google.com/eng.ucsd.edu/ucsdbookgraph
 
 ## Project structure
 
 * graphs_* - variuos visualizations
-* data_preprocessing.ipynb - preprocess review texts woth spaCy lib
+* data_preprocessing.ipynb - preprocess review texts with spaCy lib
 * baselines_* - train baselines and gather data
 * matrix_factorization_with_als.py - basic matrix factorizations using ALS
+* utils_*.py - utilities with output and evaluation methods
 * other *.py - out utils
 
 ### CDL-based models

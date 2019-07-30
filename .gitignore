@@ -1,6 +1,4 @@
 # custom
-models/
-models/*
 __pycache__/
 .ipynb_checkpoints/
 images/
@@ -9,3 +7,6 @@ shit*
 Untitled*
 studying*
 examples/
+.idea/
+.idea/*/*
+.spyproject/
