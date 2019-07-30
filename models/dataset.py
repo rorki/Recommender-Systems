@@ -25,6 +25,7 @@ class DataSet:
         # convert user and item ids to inner ids
         self.uid_map = {v: k for k, v in enumerate(df_ratings[rating_cols[0]].unique())}
         self.iid_map = {v: k for k, v in enumerate(df_ratings[rating_cols[1]].unique())}
+
         df_ratings[iid] = df_ratings[rating_cols[1]].map(self.iid_map)
         df_ratings[uid] = df_ratings[rating_cols[0]].map(self.uid_map)
 
@@ -48,6 +49,7 @@ class DataSet:
         print('Filled in %s empty reviews: %s...' % (len(empty_reviews), empty_reviews[0:5]))
 
         df_reviews[iid] = df_reviews[review_cols[0]].map(self.iid_map)
+        df_reviews.dropna(subset=[iid], inplace=True)
         df_reviews.sort_values(by=[iid], inplace=True)
 
         vectorizer = TfidfVectorizer(max_features=10000)
@@ -63,9 +65,9 @@ class DataSet:
         return self.testset[[uid, iid, rate]].values
 
     def train_user_num(self):
-        return max(self.trainset[uid]) + 1
+        return len(self.uid_map)
 
     def train_item_num(self):
-        return max(self.trainset[iid]) + 1
+        return len(self.iid_map)
 
 

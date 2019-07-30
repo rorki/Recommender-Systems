@@ -134,8 +134,8 @@ class CDL:
             for i in range(0, self.item_information_matrix.shape[0], self.batch_size):
                 x_train_batch = self.item_information_matrix_noise[i: i + self.batch_size]
                 y_train_batch = self.item_information_matrix[i: i + self.batch_size]
-
                 v_batch = qi[i: i + self.batch_size]
+
                 _, my_loss, auto_loss = sess.run([self.optimizer, self.Loss, self.loss_a],
                                                  feed_dict={self.model_x_0: x_train_batch,
                                                             self.model_X_c: y_train_batch,
