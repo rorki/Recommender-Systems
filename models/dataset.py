@@ -9,7 +9,8 @@ rate = 'rate__'
 
 class DataSet:
 
-    def __init__(self, df_ratings, rating_cols, df_reviews, review_cols):
+    def __init__(self, df_ratings, rating_cols, df_reviews, review_cols,
+                 vectorize_reviews=True, empty_element=''):
         """
         DataSet manages an internal uui and iid and provides universal access to data from different data sets.
         Makes dataset changes in place!!!
@@ -44,7 +45,7 @@ class DataSet:
         empty_reviews = []
         diff = np.setdiff1d(df_ratings[rating_cols[1]].unique(), df_reviews[review_cols[0]].unique())
         for id_ in diff:
-            df_reviews.loc[df_reviews.index.argmax() + 1] = [id_, '']
+            df_reviews.loc[df_reviews.index.argmax() + 1] = [id_, empty_element]
             empty_reviews.append(id_)
         print('Filled in %s empty reviews: %s...' % (len(empty_reviews), empty_reviews[0:5]))
 
@@ -52,8 +53,11 @@ class DataSet:
         df_reviews.dropna(subset=[iid], inplace=True)
         df_reviews.sort_values(by=[iid], inplace=True)
 
-        vectorizer = TfidfVectorizer(max_features=10000)
-        self.review_matrix = np.array(vectorizer.fit_transform(df_reviews[review_cols[1]].values).todense())
+        if vectorize_reviews:
+            vectorizer = TfidfVectorizer(max_features=10000)
+            self.review_matrix = np.array(vectorizer.fit_transform(df_reviews[review_cols[1]].values).todense())
+        else:
+            self.review_matrix = np.array(df_reviews[review_cols[1]].values.tolist(), dtype=int)
 
     def get_train_rating_matrix(self):
         return self.trainset[[uid, iid, rate]].values

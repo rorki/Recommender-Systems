@@ -6,8 +6,9 @@ import numpy as np
 
 
 class CDL:
-    def __init__(self, dataset, out_path=None, k=10, epochs=50, batch_size=64, lr=0.0001, hidden_size=25,
-                 matrix_noise=0.3, drop_ratio=0.1, lambda_w=1, lambda_n=1, lambda_v=1, lambda_q=0.01):
+    def __init__(self, dataset, out_path=None, k=10, epochs=50, batch_size=64, lr=0.0001,
+                 hidden_size=25, matrix_noise=0.3, drop_ratio=0.1, lambda_w=1, lambda_n=1,
+                 lambda_v=1, lambda_q=0.01):
         self.out_path = out_path
         self.k = k
 
@@ -145,7 +146,7 @@ class CDL:
                 model_losses.append(my_loss)
 
             if verbose:
-                print("ALS LOSS RMSE = %s, MAE = %s" % (err_rmse, err_mae))
+                print("SGD LOSS RMSE = %s, MAE = %s" % (err_rmse, err_mae))
                 print("MODEL LOSS %s" % np.mean(model_losses))
                 print("AUTOENCODER LOSS %s" % np.mean(auto_losses))
                 print("VALIDATION LOSS %s" % val_loss)
@@ -156,7 +157,7 @@ class CDL:
                 summary = tf.Summary()
                 summary.value.add(tag='Autoencoder Loss', simple_value=np.mean(auto_losses))
                 summary.value.add(tag='Model Loss', simple_value=np.mean(model_losses))
-                summary.value.add(tag='ALS Loss', simple_value=err_rmse)
+                summary.value.add(tag='SGD Loss', simple_value=err_rmse)
                 summary.value.add(tag='Val Loss', simple_value=val_loss)
                 train_writer.add_summary(summary, epoch + 1)
                 # dump model and pickles
