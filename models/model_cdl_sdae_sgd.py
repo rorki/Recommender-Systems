@@ -7,13 +7,13 @@ import numpy as np
 
 class CDL:
     def __init__(self, dataset, out_path=None, k=10, epochs=50, batch_size=64, lr=0.0001,
-                 hidden_size=25, matrix_noise=0.3, drop_ratio=0.1, lambda_w=1, lambda_n=1,
+                 hidden_size=25, drop_ratio=0.1, lambda_w=1, lambda_n=1,
                  lambda_v=1, lambda_q=0.01):
         self.out_path = out_path
         self.k = k
 
         self.item_information_matrix = dataset.review_matrix
-        self.item_information_matrix_noise = self.add_noise(self.item_information_matrix, matrix_noise)
+        self.item_information_matrix_noise = dataset.noised_review_matrix
 
         self.rating_matrix = dataset.get_train_rating_matrix()
         self.valid_set = dataset.get_valid_rating_matrix()
@@ -172,12 +172,3 @@ class CDL:
         sess.close()
         return mu, pu, qi, bu, bi
 
-    @staticmethod
-    def mask(x, corruption_level):
-        mask = np.random.binomial(1, 1 - corruption_level, x.shape)
-        return np.multiply(x, mask)
-
-    @staticmethod
-    def add_noise(x, corruption_level):
-        print('Noising of reviews')
-        return np.array([CDL.mask(x=i, corruption_level=corruption_level) for i in x])

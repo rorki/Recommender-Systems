@@ -10,7 +10,8 @@ rate = 'rate__'
 class DataSet:
 
     def __init__(self, df_ratings, rating_cols, df_reviews, review_cols,
-                 vectorize_reviews=True, empty_element=''):
+                 vectorize_reviews=True, empty_element='', noise_reviews = False,
+                 matrix_noise = 0.3):
         """
         DataSet manages an internal uui and iid and provides universal access to data from different data sets.
         Makes dataset changes in place!!!
@@ -59,6 +60,9 @@ class DataSet:
         else:
             self.review_matrix = np.array(df_reviews[review_cols[1]].values.tolist(), dtype=int)
 
+        if noise_reviews:
+            self.noised_review_matrix = self.add_noise(self.review_matrix, matrix_noise)
+
     def get_train_rating_matrix(self):
         return self.trainset[[uid, iid, rate]].values
 
@@ -73,5 +77,15 @@ class DataSet:
 
     def train_item_num(self):
         return len(self.iid_map)
+
+    @staticmethod
+    def mask(x, corruption_level):
+        mask = np.random.binomial(1, 1 - corruption_level, x.shape)
+        return np.multiply(x, mask)
+
+    @staticmethod
+    def add_noise(x, corruption_level):
+        print('Noising of reviews')
+        return np.array([DataSet.mask(x=i, corruption_level=corruption_level) for i in x])
 
 
