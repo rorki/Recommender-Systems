@@ -33,7 +33,7 @@ class DataSet:
 
         # split to train, validation and test set
         trainset, testset = train_test_split(df_ratings, test_size=0.3, random_state=42)
-        trainset, valset = train_test_split(trainset, test_size=0.2, random_state=42)
+        trainset, valset = train_test_split(trainset, test_size=0.15, random_state=42)
 
         # drop rows with items\user not presented in train set
         self.trainset = trainset
